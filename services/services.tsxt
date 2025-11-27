@@ -1,0 +1,61 @@
+job portal micorservices nextjs , prisma , nodejs, expressjs , docker , kafka , gemini , reedis ,aws, razorpay , typescript
+
+services
+
+1. auth services
+2. user services
+3. utils services  => upload, ai response, mail services
+4. job services
+5. payment services
+
+
+----------------------------------
+npm init -y
+tsc --init
+ npm i express jsonwebtoken dotenv bcrypt concurrently
+ npm i -D @types/express @types/jsonwebtoken @types/dotenv @types/bcrypt typescript
+
+then build project
+ => tsc
+
+ npm i @neondatabase/serverless
+
+ ////////////////////////////////////////////
+
+ for forget passwording why we use kafka
+why not for while createing user with resume
+for resume  we need resume url for creating the user that why we r not using here
+data => user => url => resume
+
+for forget passwording without kafka
+email 100ms => email-mail forget password link 5-10 ms => response 5.1-10.1 ms
+
+forget passwording with kafka
+email => response 100 ms
+message broker (kafka) will send email 
+
+
+------------------------------------------------------
+
+npm i kafkajs
+npm i -D @types/kafkajs
+
+kafka  => producer ,consumer 
+
+    producer creates the message => consumer will accept the message 
+    producer will have send mail message and if consumer has the message of the send mail then consumer will trigger and mail will send
+
+
+installing kafka in docker
+
+=> docker pull apache/kafka:4.1.1
+
+First Command 
+ docker pull apache/kafka:4.1.0 
+ 
+Second Command 
+ 
+docker run -d --name kafka -p 9092:9092 -e KAFKA_NODE_ID=1 -e KAFKA_PROCESS_ROLES=broker,controller -e KAFKA_LISTENER_SECURITY_PROTOCOL_MAP=PLAINTEXT:PLAINTEXT,CONTROLLER:PLAINTEXT -e KAFKA_LISTENERS=PLAINTEXT://:9092,CONTROLLER://:9093 -e KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://localhost:9092 -e KAFKA_CONTROLLER_LISTENER_NAMES=CONTROLLER -e KAFKA_CONTROLLER_QUORUM_VOTERS=1@localhost:9093 -e KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR=1 -e KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS=0 apache/kafka:4.1.1 
+ 
+ 
+ 
